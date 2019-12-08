@@ -1,5 +1,6 @@
 class TransactionsController < ApplicationController
   before_action :set_transaction, only: [:show, :update, :destroy]
+  before_action :authorize_request
 
   # GET /transactions
   def index
@@ -15,16 +16,11 @@ class TransactionsController < ApplicationController
 
   # POST /transactions
   def create
-    #source_account = Account.find_by(id: params[:source_account_id])
-    @transaction = Transaction.new(transaction_params)
-    unless @transaction.source_account.has_balance?(transaction_params[:amount])
-      render json: "Saldo Insuficiente", status: :unprocessable_entity
-    else
-      if @transaction.save
-        render json: @transaction, status: :created, location: @transaction
-      else
-        render json: @transaction.errors, status: :unprocessable_entity
-      end
+    @transaction = TransactionService.create(params)
+    if @transaction.errors.any?
+      render json: @transaction.errors.messages, status: :unprocessable_entity
+    else 
+      render json: {"message": "Transação realizada com sucesso!"}, status: :ok 
     end
   end
 

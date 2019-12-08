@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
-  resources :transactions
-  resources :accounts
   resources :clients
-  resources :clientes
-  resources :banks
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  resources :transactions, except: [:update]
+  resources :accounts, only: [:show] do
+    collection do
+      get 'balance'
+    end
+  end
+  post '/auth/login', to: 'authentication#login'
 end

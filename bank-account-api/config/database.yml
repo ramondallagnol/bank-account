@@ -23,9 +23,7 @@ default: &default
 
 development:
   <<: *default
-  database: bank_account_api_development
-  username: postgres
-  password: Bg7mkib.  
+  database: bank_account_api_development 
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.

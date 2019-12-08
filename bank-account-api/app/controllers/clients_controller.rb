@@ -1,4 +1,5 @@
 class ClientsController < ApplicationController
+  # before_action :authorize_request, except: :create
   before_action :set_client, only: [:show, :update, :destroy]
 
   # GET /clients
@@ -15,14 +16,13 @@ class ClientsController < ApplicationController
 
   # POST /clients
   def create
-    name = params[:password]
-    
+    puts client_params
     @client = Client.new(client_params)
-
     if @client.save
-      render json: @client, status: :created, location: @client
+      render json: @client, status: :created
     else
-      render json: @client.errors, status: :unprocessable_entity
+      render json: { errors: @client.errors.full_messages },
+             status: :unprocessable_entity
     end
   end
 
@@ -38,7 +38,7 @@ class ClientsController < ApplicationController
   # DELETE /clients/1
   def destroy
     @client.destroy
-  end
+  end  
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -48,6 +48,6 @@ class ClientsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def client_params
-      params.require(:client).permit(:name, :email, :string, :encrypted_password, :token)
+      params.require(:client).permit(:password, :name, :email, :password_confirmation, :password_digest)
     end
 end

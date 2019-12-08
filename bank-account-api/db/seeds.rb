@@ -28,9 +28,9 @@ puts "BANKS generated!"
 
 # Generate Clients
 puts "Generating the CLIENTS"
-ramon  = Client.find_or_create_by!(name: "Ramon Silveira Dall Agnol", email: "ramonsildallagnol@gmail.com")
-karina = Client.find_or_create_by!(name: "Karina Resner", email: "karina.resner@gmail.com")
-puts "CLIENTES generated!"
+ramon  = Client.find_or_create_by!(name: "Ramon Silveira Dall Agnol", email: "ramonsildallagnol@gmail.com", "password": "123dsfds")
+karina = Client.find_or_create_by!(name: "Karina Resner", email: "karina.resner@gmail.com", "password": "123dsfds")
+puts "CLIENTS generated!"
 
 # Generate Accounts arrumar aqui
 puts "Generating the ACCOUNTS"

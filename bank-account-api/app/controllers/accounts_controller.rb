@@ -1,5 +1,6 @@
 class AccountsController < ApplicationController
-  before_action :set_account, only: [:show, :update, :destroy]
+  before_action :set_account, only: [:show, :update, :destroy, :balance]
+  before_action :authorize_request
 
   # GET /accounts
   def index
@@ -32,19 +33,27 @@ class AccountsController < ApplicationController
     end
   end
 
+  def balance
+    render json: {"balance": @account.balance}, status: :ok 
+  end  
+
   # DELETE /accounts/1
   def destroy
     @account.destroy
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_account
-      @account = Account.find(params[:id])
+      if params[:account_id]
+        @account = Account.find_by(id: params[:account_id])
+      else
+        @account = Account.find(params[:id])
+      end
+      render json: {"message": 'Conta inexistente'}, status: :not_found if @account.blank?
     end
 
     # Only allow a trusted parameter "white list" through.
     def account_params
-      params.require(:account).permit(:number, :agency, :balance, :client_id, :bank_id)
+      params.require(:account).permit(:number, :agency, :client_id, :bank_id)
     end
 end

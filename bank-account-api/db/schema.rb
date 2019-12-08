@@ -18,7 +18,6 @@ ActiveRecord::Schema.define(version: 2019_12_04_220012) do
   create_table "accounts", force: :cascade do |t|
     t.string "number"
     t.string "agency"
-    t.decimal "balance", precision: 16, scale: 2
     t.bigint "client_id", null: false
     t.bigint "bank_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -37,9 +36,7 @@ ActiveRecord::Schema.define(version: 2019_12_04_220012) do
   create_table "clients", force: :cascade do |t|
     t.string "name", limit: 60
     t.string "email", limit: 80
-    t.string "string"
-    t.string "encrypted_password"
-    t.string "token"
+    t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
