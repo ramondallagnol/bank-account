@@ -1,11 +1,3 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-
 # Generate banks
 puts "Generating the BANKS..."
 banks = [{"name" =>"Banco do Brasil S.A.", "code" => "001"},
@@ -28,12 +20,17 @@ puts "BANKS generated!"
 
 # Generate Clients
 puts "Generating the CLIENTS"
-ramon  = Client.find_or_create_by!(name: "Ramon Silveira Dall Agnol", email: "ramonsildallagnol@gmail.com", "password": "123dsfds")
-karina = Client.find_or_create_by!(name: "Karina Resner", email: "karina.resner@gmail.com", "password": "123dsfds")
+ramon  = Client.create!(name: "Ramon Silveira Dall Agnol", email: "ramonsildallagnol@gmail.com", "password": "123456")
+karina = Client.create!(name: "Karina Resner", email: "karina.resner@gmail.com", "password": "123456")
 puts "CLIENTS generated!"
 
-# Generate Accounts arrumar aqui
+# Generate Accounts
 puts "Generating the ACCOUNTS"
-Account.find_or_create_by!(number: "001245", agency: "1233", balance: 1000, client_id: ramon.id, bank_id: 1)
-Account.find_or_create_by!(number: "08088", agency: "1233", balance: 0, client_id: karina.id, bank_id: 2)
+Account.find_or_create_by!(number: "001245", agency: "1233", client_id: ramon.id, bank_id: 1)
+Account.find_or_create_by!(number: "08088", agency: "1233", client_id: karina.id, bank_id: 2)
 puts "ACCOUNTS generated!"
+
+# Generate Transactions
+puts "Generating the TRANSACTIONS"
+Transaction.create!(amount: "1000", source_account_id: 1, destination_account_id: 2)
+puts "TRANSACTIONS generated!"

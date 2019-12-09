@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :clients
   resources :transactions, except: [:update]
-  resources :accounts, only: [:show] do
+  resources :accounts do
     collection do
       get 'balance'
     end

@@ -1,6 +1,6 @@
 class AccountsController < ApplicationController
   before_action :set_account, only: [:show, :update, :destroy, :balance]
-  before_action :authorize_request
+  # before_action :authorize_request
 
   # GET /accounts
   def index
@@ -49,7 +49,7 @@ class AccountsController < ApplicationController
       else
         @account = Account.find(params[:id])
       end
-      render json: {"message": 'Conta inexistente'}, status: :not_found if @account.blank?
+      render json: {"message": "Account not found"}, status: :not_found if @account.blank?
     end
 
     # Only allow a trusted parameter "white list" through.

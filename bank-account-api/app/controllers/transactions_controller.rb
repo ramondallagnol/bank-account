@@ -20,7 +20,7 @@ class TransactionsController < ApplicationController
     if @transaction.errors.any?
       render json: @transaction.errors.messages, status: :unprocessable_entity
     else 
-      render json: {"message": "Transação realizada com sucesso!"}, status: :ok 
+      render json: {"message": "Successful transaction!"}, status: :ok 
     end
   end
 
@@ -48,4 +48,5 @@ class TransactionsController < ApplicationController
     def transaction_params
       params.require(:transaction).permit(:amount, :source_account_id, :destination_account_id)
     end
+
 end
