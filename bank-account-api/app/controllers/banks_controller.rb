@@ -1,5 +1,6 @@
 class BanksController < ApplicationController
   before_action :set_bank, only: [:show, :update, :destroy]
+  before_action :authorize_request
 
   # GET /banks
   def index

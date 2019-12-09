@@ -8,10 +8,14 @@ default: &default
 development:
   <<: *default
   database: bank_account_api_development 
+  username: postgres
+  password: Bg7mkib.
 
 test:
   <<: *default
-  database: bank_account_api_test 
+  database: bank_account_api_test
+  username: postgres
+  password: Bg7mkib.  
 
 production:
   <<: *default
